@@ -1,6 +1,3 @@
-:root{
-    background-image: url(../src/img/fondo.png);
-}
 header{
     display: flex;
     flex-direction: column;
@@ -11,18 +8,24 @@ body {
     min-width: 320px;
     min-height: 100vh;
 }
-.App{
-    background-image: url(../src/img/fondo.png);
-}
-.NavBar{
-    background-color: white;
-    min-width: 90vw;
+.barra{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     place-items: center;
 }
-.item{
-    background-color: white;
+.app-light{
+    background-image: url(../src/assets/img/fondo-light.png);
+    min-height: 100vh;
+}
+.app-dark{
+    background-image: url(../src/assets/img/fondo-dark.png);
+    min-height: 100vh;
+}
+.button-app-light{
+    color: black;
+}
+.button-app-dark{
+    color: white;
 }
 .items{
     display: flex;
@@ -30,4 +33,63 @@ body {
     place-items: center;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    row-gap: 20px;
+}
+.card-light{
+    background-color: white;
+    color: black;
+}
+.card-dark{
+    background-color: rgb(78, 77, 77);
+    color: white;
+}
+.button-card-dark{
+    color: black;
+}
+.detail-light{
+    background-color: white;
+    color: black;
+}
+.detail-dark{
+    background-color: rgb(78, 77, 77);
+    color: white;
+}
+.button-detail-dark{
+    color: black;
+}
+.navBar-light{
+    color: black;
+}
+.navBar-dark{
+    color: white;
+}
+.link-navBar-dark{
+    color: white;
+}
+.cart-light{
+    background-color: rgba(255, 255, 255, 0.486);
+    color: black;
+}
+.cart-dark{
+    background-color: rgba(78, 77, 77, 0.514);
+    color: white;
+}
+.button-cart-dark{
+    color: black;
+}
+.h-cart-dark, .f-cart-dark{
+    background-color: rgba(255, 255, 255, 0.664);
+}
+.texto{
+    background-color: rgba(255, 255, 255, 0.664);
+    padding: 20px;
+    font-weight: 800;
+}
+.contenedorCarrito{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 20px;
 }

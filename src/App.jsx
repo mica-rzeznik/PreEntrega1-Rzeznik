@@ -1,75 +1,63 @@
-import { useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
-import ItemDetailContainer from './components/ItemDetailContainer'
+import { ItemDetailContainerAzucarados, ItemDetailContainerChocolate, ItemDetailContainerGolosinas, ItemDetailContainerPasteleria, ItemDetailContainerHelados } from './components/ItemDetailContainer'
 import ItemListContainer from './components/ItemListContainer'
 import NavBar from './components/NavBar'
-import productos from './productos.json' 
-import axios from 'axios'
+import { Button } from '@chakra-ui/react'
+import { RxMagicWand } from 'react-icons/Rx'
+import { collection } from 'firebase/firestore'
+import useGetDocs from './customHooks/useGetDocs'
+import { db } from "../db/firebase-config"
+import CartContainer from './components/CartContainer'
 
+export const ThemeContext = createContext(null)
+export const CartContext = createContext()
 
 function App() {
-  const [Golosina, setGolosina] = useState([])
-  const [Azucarado, setAzucarado] = useState([])
-  const [Chocolat, setChocolat] = useState([])
-  const [Pasteleri, setPasteleri] = useState([])
-  const [Helado, setHelado] = useState([])
-  const {Golosinas, Azucarados, Chocolate, Pasteleria, Helados} = productos
-  const getGolosina = () => {
-    axios.get("./src/productos.json")
-    .then(res=>setGolosina(res.data.Golosinas))
-  }
-  const getAzucarado = () => {
-    axios.get("./src/productos.json")
-    .then(res=>setAzucarado(res.data.Azucarados))
-  }
-  const getChocolat = () => {
-    axios.get("./src/productos.json")
-    .then(res=>setChocolat(res.data.Chocolate))
-  }
-  const getPasteleri = () => {
-    axios.get("./src/productos.json")
-    .then(res=>setPasteleri(res.data.Pasteleria))
-  }
-  const getHelado = () => {
-    axios.get("./src/productos.json")
-    .then(res=>setHelado(res.data.Helados))
-  }
-  useEffect(() => {
-    getGolosina()
-    getAzucarado()
-    getChocolat()
-    getPasteleri()
-    getHelado()
-  }, [])
+  const [golosinas, setGolosinas] = useGetDocs(collection(db, "Golosinas"))
+  const [azucarados, setAzucarados] = useGetDocs(collection(db, "Azucarados"))
+  const [chocolate, setChocolate] = useGetDocs(collection(db,"Chocolate"))
+  const [pasteleria, setPasteleria] = useGetDocs(collection(db, "Pastelería"))
+  const [helados, setHelados] = useGetDocs(collection(db, "Helados"))
+  const [orders, setOrders] = useGetDocs(collection(db, "orders"))
+  const [theme, setTheme] = useState("light")
+  const [cart, setCart] = useState ([])
+  const productos = [golosinas, azucarados, chocolate, pasteleria, helados]
+  const nameClass = "app-" + theme 
+  console.log(cart)
   return (
-    <div className="App">
-      <header>
-        <Link to="/">
-          <img src="./src/img/honeydukes_logo.png" width={300} alt="Honeydukes_logo"/>
-        </Link>
-        <div className="NavBar">
-          <NavBar/>
+    <ThemeContext.Provider value={theme}>
+      <CartContext.Provider value={[cart, setCart]}>
+        <div className={nameClass}>
+          <header>
+            <Link to="/">
+              <img src="https://i.imgur.com/lkKGKU4.png" width={300} alt="Honeydukes_logo"/>
+            </Link>
+            <div className='barra'>
+              <NavBar orders={orders}/>
+              <Button className={"button-" + nameClass} colorScheme='blackAlpha' onClick={()=>setTheme((theme ==="light") ? "dark" : "light")}>{(theme ==="light") ? "Nox" : "Lumos"}<RxMagicWand/></Button>
+            </div>
+          </header>
+          <div className='items'>
+          <Routes>
+            <Route path="/" element={<><img src="./src/assets/img/lechuzaVoladora.webp"/> <p className='texto'>Bienvenidos Magos y brujas</p></>}/>
+            <Route path="/Golosinas" element={<ItemListContainer itemListContainer={golosinas} setGolosinas={setGolosinas}/>}/>
+            <Route path="/Golosinas/:id" element={<ItemDetailContainerGolosinas/>}/>
+            <Route path="/Azucarados" element={<ItemListContainer itemListContainer={azucarados} setAzucarados={setAzucarados}/>}/>
+            <Route path="/Azucarados/:id" element={<ItemDetailContainerAzucarados/>}/>
+            <Route path="/Chocolate" element={<ItemListContainer itemListContainer={chocolate} setChocolate={setChocolate}/>}/>
+            <Route path="/Chocolate/:id" element={<ItemDetailContainerChocolate/>}/>
+            <Route path="/Pasteleria" element={<ItemListContainer itemListContainer={pasteleria} setPasteleria={setPasteleria}/>}/>
+            <Route path="/Pasteleria/:id" element={<ItemDetailContainerPasteleria/>}/>
+            <Route path="/Helados" element={<ItemListContainer itemListContainer={helados} setHelados={setHelados}/>}/>
+            <Route path="/Helados/:id" element={<ItemDetailContainerHelados/>}/>
+            <Route path="/Lechuza" element={<CartContainer orders={orders} setOrders={setOrders}/>}/>
+            <Route path="*" element={<Navigate to="/"/>}/>
+          </Routes>
+          </div>
         </div>
-      </header>
-      <div className='items'>
-      <Routes>
-        <Route path="/" element={<img src="./src/img/lechuzaVoladora.webp"/>}/>
-        <Route path="/Golosinas" element={<ItemListContainer itemListContainer={Golosina}/>}/>
-        <Route path="/Golosinas/:nombre" element={<ItemDetailContainer productos={productos}/>}/>
-        <Route path="/Azucarados" element={<ItemListContainer itemListContainer={Azucarado}/>}/>
-        <Route path="/Azucarados/:nombre" element={<ItemDetailContainer productos={productos}/>}/>
-        <Route path="/Chocolate" element={<ItemListContainer itemListContainer={Chocolat}/>}/>
-        <Route path="/Chocolate/:nombre" element={<ItemDetailContainer productos={productos}/>}/>
-        <Route path="/Pasteleria" element={<ItemListContainer itemListContainer={Pasteleri}/>}/>
-        <Route path="/Pasteleria/:nombre" element={<ItemDetailContainer productos={productos}/>}/>
-        <Route path="/Helados" element={<ItemListContainer itemListContainer={Helado}/>}/>
-        <Route path="/Helados/:nombre" element={<ItemDetailContainer productos={productos}/>}/>
-        <Route path="/Lechuza" element={<img src="./src/img/lechuzaVoladora.webp"/>}/>
-        <Route path="*" element={<Navigate to="/"/>}/>
-      </Routes>
-      </div>
-    </div>
+      </CartContext.Provider>
+    </ThemeContext.Provider>
   )
 }
-
 export default App

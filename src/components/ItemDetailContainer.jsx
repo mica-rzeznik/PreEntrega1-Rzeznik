@@ -1,43 +1,79 @@
-import { Button, Card, CardBody, CardFooter, Heading, Image, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import useGetDoc from '../customHooks/useGetDoc'
+import { doc } from 'firebase/firestore'
+import { db } from '../../db/firebase-config'
+import { useEffect, useState } from 'react'
+import { CircularProgress } from '@chakra-ui/react'
+import ItemDetail from './ItemDetail'
 
-const ItemDetailContainer = ({productos}) => {
-    const {nombre}= useParams()
-    const categoria = useLocation().pathname.split("/")[1]
-    const items = productos[categoria]
-    const item = items.find((item) => item.nombre === nombre)
+export const ItemDetailContainerGolosinas = ({hola}) => {
+    const [loading, setLoading] = useState(true)
+    const { id }= useParams()
+    const [item]  = useGetDoc(doc(db, "Golosinas" , id))
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },500)
+    },[])
     return (
-        <Card
-        direction={{ base: 'column', sm: 'row' }}
-        overflow='hidden'
-        variant='outline'
-        size='lg'
-        bgColor='white'
-        >
-            <Image
-            objectFit='cover'
-            maxW={{ base: '100%', sm: '200px' }}
-            src={item.imagen2}
-            alt='Dulce mágico'
-            />
-            <Stack>
-                <CardBody>
-                    <Heading size='md'>{item.nombre}</Heading>
-                    <Text py='2'>{item.descripcion}</Text>
-                    <Text color='blue.600' fontSize='2xl'>{item.precio}</Text>
-                </CardBody>
-                <CardFooter>
-                    <Button variant='solid' colorScheme='blue'>
-                        Accio.
-                    </Button>
-                    <Button variant='ghost' colorScheme='blue'>
-                        Agregar al paquete de la lechuza.
-                    </Button>
-                </CardFooter>
-            </Stack>
-        </Card>
+        <>{loading?<CircularProgress isIndeterminate color='green.300' />:<ItemDetail nombre={item.nombre} descripcion={item.descripcion} imagen={item.imagen} precio={item.precio} id={item.id}/>}</>
+        
+    )
+}
+export const ItemDetailContainerAzucarados = ({hola}) => {
+    const [loading, setLoading] = useState(true)
+    const { id }= useParams()
+    const [item]  = useGetDoc(doc(db, "Azucarados" , id))
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },500)
+    },[])
+    return (
+        <>{loading?<CircularProgress isIndeterminate color='green.300' />:<ItemDetail nombre={item.nombre} descripcion={item.descripcion} imagen={item.imagen} precio={item.precio} id={item.id}/>}</>
+    )
+}
+export const ItemDetailContainerChocolate = ({hola}) => {
+    const [loading, setLoading] = useState(true)
+    const { id }= useParams()
+    const [item]  = useGetDoc(doc(db, "Chocolate" , id))
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },500)
+    },[])
+    return (
+        <>{loading?<CircularProgress isIndeterminate color='green.300' />:<ItemDetail nombre={item.nombre} descripcion={item.descripcion} imagen={item.imagen} precio={item.precio} id={item.id}/>}</>
+    )
+}
+export const ItemDetailContainerPasteleria = ({hola}) => {
+    const [loading, setLoading] = useState(true)
+    const { id }= useParams()
+    const [item]  = useGetDoc(doc(db, "Pastelería" , id))
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },500)
+    },[])
+    return (
+        <>{loading?<CircularProgress isIndeterminate color='green.300' />:<ItemDetail nombre={item.nombre} descripcion={item.descripcion} imagen={item.imagen} precio={item.precio} id={item.id}/>}</>
+    )
+}
+export const ItemDetailContainerHelados = ({hola}) => {
+    const [loading, setLoading] = useState(true)
+    const { id }= useParams()
+    const [item]  = useGetDoc(doc(db, "Helados" , id))
+    useEffect(()=>{
+        setTimeout(()=>{
+            setLoading(false)
+        },500)
+    },[])
+    return (
+        <>{loading?<CircularProgress isIndeterminate color='green.300' />:<ItemDetail nombre={item.nombre} descripcion={item.descripcion} imagen={item.imagen} precio={item.precio} id={item.id}/>}</>
     )
 }
 
-export default ItemDetailContainer
+const Hola = ({hola}) => {
+    console.log("hola")
+}
+export default Hola

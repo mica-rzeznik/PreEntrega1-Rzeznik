@@ -1,9 +1,13 @@
-import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+import { Avatar, AvatarBadge} from '@chakra-ui/react'
+import { useContext } from 'react'
+import { CartContext } from "../App"
+
 const CartWidget = () =>{
+    const [cart, setCart] = useContext(CartContext)
     return (
-        <Avatar src='./src/img/lechuza.png'>
+        <Avatar src='./src/assets/img/lechuza.png'>
             <AvatarBadge boxSize='1.25em' bg='green.500' borderColor='lightgreen'>
-                7
+                {cart.length}
             </AvatarBadge>
         </Avatar>
     )
