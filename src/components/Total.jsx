@@ -5,7 +5,7 @@ const Total =() =>{
     const [cart, setCart] = useContext(CartContext)
     return(
         cart.reduce(
-            (accumulator, currentValue) => accumulator + currentValue.precio,
+            (accumulator, currentValue) => accumulator + (currentValue.precio * currentValue.quantity),
             0)
     )
 }

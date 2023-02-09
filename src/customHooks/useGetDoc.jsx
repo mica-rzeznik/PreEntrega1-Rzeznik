@@ -8,9 +8,9 @@ function useGetDoc(eldoc) {
     const getItem = async (id) => {
         const itemDoc = await getDoc(eldoc)
         if (itemDoc.exists()) {
-            setItem(itemDoc.data());
+            setItem(itemDoc.data())
         } else {
-            console.log("El ítem no existe");
+            console.log("El ítem no existe")
         }
     }
     useEffect(() => {

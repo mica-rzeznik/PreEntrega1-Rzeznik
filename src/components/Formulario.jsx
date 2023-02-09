@@ -1,9 +1,11 @@
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button } from '@chakra-ui/react'
-import { addDoc, collection, doc, getDocs } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, Timestamp } from 'firebase/firestore'
 import { db } from '../../db/firebase-config'
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from '../App';
-import Total from './Total';
+import { useContext, useEffect, useState } from "react"
+import { CartContext } from '../App'
+import checkOut from './checkOut'
+import useGetDocs from '../customHooks/useGetDocs'
+import Swal from 'sweetalert2'
 
 const Formulario = () =>{
     const [cart, setCart] = useContext(CartContext)
@@ -14,34 +16,34 @@ const Formulario = () =>{
     const [inputLechuza, setInputLechuza] = useState('')
     const [inputEmail, setInputEmail] = useState('')
     const [inputEmail2, setInputEmail2] = useState('')
-    // const [prueba, setPrueba] = useState ('')
+    const [orden, setOrden] = useGetDocs(collection(db, "orders"))
+    const Swal = require('sweetalert2')
     const crearOrden = async (e) => { 
         e.preventDefault()
         const orden = {
-            nombre: inputNombre,
-            apellido: inputApellido,
-            lechuza: inputLechuza, 
-            email: inputEmail,
-            compra: [cart]
+            comprador: { nombre: inputNombre, Apellido: inputApellido, Lechuza: inputLechuza,  Email: inputEmail },
+            productos: cart,
+            fecha: new Date()
         }
         const ordersCollection = collection(db, "orders")
         await addDoc(ordersCollection, orden) 
         const data = await getDocs(ordersCollection) 
         setOrder(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-        // console.log("mica kpa")
         setCargando(true)
         setTimeout(()=>{
             setCargando(false)
         },1500)
-        // setInputNombre("")
-        // setInputApellido("")
-        // setInputLechuza("")
-        // setInputEmail("")
-        // setInputEmail2("")
-        // setCart([])
+        setTimeout(()=>{
+            setInputNombre("")
+            setInputApellido("")
+            setInputLechuza("")
+            setInputEmail("")
+            setInputEmail2("")
+            setCart([])
+        },1500)
     }
     const isError = inputEmail !== inputEmail2
-    
+    Swal.fire('Any fool can use a computer')
     return(
         <form onSubmit={crearOrden}>
             <FormControl isRequired>
@@ -72,7 +74,7 @@ const Formulario = () =>{
                 )}
             </FormControl>
             <Button isLoading={cargando} colorScheme='teal' variant='solid' type='submit'>
-                Comprar
+                Confirmar compra
             </Button>
         </form>
     )
