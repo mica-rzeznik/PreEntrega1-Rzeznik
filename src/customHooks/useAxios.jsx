@@ -9,5 +9,5 @@ function useAxios(url) {
     }, [])
     return {dulce}
 }
-
+//lo hice cuando todavía no usábamos firebase para tomar los productos desde el json. Lo dejo por las dudas
 export default useAxios

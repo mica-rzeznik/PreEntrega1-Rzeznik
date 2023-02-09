@@ -21,10 +21,10 @@ body {
     background-image: url(../src/assets/img/fondo-dark.png);
     min-height: 100vh;
 }
-.button-app-light{
+.button-app-light, .navBar-light, .button-detail-dark, .button-card-dark{
     color: black;
 }
-.button-app-dark{
+.button-app-dark, .navBar-dark, .link-navBar-dark{
     color: white;
 }
 .items{
@@ -35,43 +35,12 @@ body {
     justify-content: space-evenly;
     row-gap: 20px;
 }
-.card-light{
+.card-light, .detail-light{
     background-color: white;
     color: black;
 }
-.card-dark{
+.card-dark, .detail-dark{
     background-color: rgb(78, 77, 77);
-    color: white;
-}
-.button-card-dark{
-    color: black;
-}
-.detail-light{
-    background-color: white;
-    color: black;
-}
-.detail-dark{
-    background-color: rgb(78, 77, 77);
-    color: white;
-}
-.button-detail-dark{
-    color: black;
-}
-.navBar-light{
-    color: black;
-}
-.navBar-dark{
-    color: white;
-}
-.link-navBar-dark{
-    color: white;
-}
-.cart-light{
-    background-color: rgba(255, 255, 255, 0.486);
-    color: black;
-}
-.cart-dark{
-    background-color: rgba(78, 77, 77, 0.514);
     color: white;
 }
 .button-cart-dark{
@@ -79,6 +48,7 @@ body {
 }
 .h-cart-dark, .f-cart-dark{
     background-color: rgba(255, 255, 255, 0.664);
+    color: red;
 }
 .texto{
     background-color: rgba(255, 255, 255, 0.664);
@@ -92,4 +62,13 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     row-gap: 20px;
+}
+.form-light, .cart-light{
+    background-color: white;
+    color: black;
+}
+.form-dark, .cart-dark{
+    background-color: rgb(78, 77, 77);
+    color: white;
+    border-color: black;
 }
