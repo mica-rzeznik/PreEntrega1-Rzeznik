@@ -2,7 +2,6 @@ import { Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Image, Stack,
 import { useContext } from "react"
 import { ThemeContext } from "../App"
 import { CartContext } from "../App"
-import { RxMagicWand } from 'react-icons/Rx'
 
 const ItemDetail = ({nombre, descripcion, imagen, precio, id})=>{
     const nameClass = "detail-" + useContext(ThemeContext)

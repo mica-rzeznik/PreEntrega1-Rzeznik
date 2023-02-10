@@ -2,7 +2,6 @@ import { Box, Button, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } f
 import { CartContext } from "../App"
 import React from 'react'
 import Total from './Total'
-import { ImBin } from 'react-icons/Im'
 import { useContext } from 'react'
 import { ThemeContext } from '../App'
 
@@ -48,7 +47,7 @@ const Cart = () => {
                                     <Td isNumeric>{cosa.precio*cosa.quantity}</Td>
                                     <Td>
                                         <Button size='xs' colorScheme='gray' className={"button-" + nameClass} onClick={()=>quitarLechuza(cosa.id)}>
-                                            <ImBin/>
+                                            Borrar
                                         </Button>
                                     </Td>
                                 </Tr>
@@ -62,7 +61,7 @@ const Cart = () => {
                             <Th isNumeric><Total/></Th>
                             <Th>
                                 <Button size='xs' colorScheme='gray' className={"button-" + nameClass} onClick={()=>vaciarLechuza()}>
-                                    <ImBin/>Todo
+                                    Borrar todo
                                 </Button>
                             </Th>
                         </Tr>
