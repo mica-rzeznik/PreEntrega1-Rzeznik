@@ -39,7 +39,7 @@ function App() {
           </header>
           <div className='items'>
           <Routes>
-            <Route path="/" element={<><img src="./src/assets/img/lechuzaVoladora.webp"/> <p className='texto'>Bienvenidos Magos y brujas</p></>}/>
+            <Route path="/" element={<><img src="https://i.imgur.com/sRujgff.png"/> <p className='texto'>Bienvenidos Magos y brujas</p></>}/>
             <Route path="/Golosinas" element={<ItemListContainer itemListContainer={golosinas} setGolosinas={setGolosinas}/>}/>
             <Route path="/Golosinas/:id" element={<ItemDetailContainerGolosinas/>}/>
             <Route path="/Azucarados" element={<ItemListContainer itemListContainer={azucarados} setAzucarados={setAzucarados}/>}/>

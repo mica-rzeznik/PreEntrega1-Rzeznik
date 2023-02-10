@@ -8,7 +8,7 @@ const CartWidget = () =>{
         return acc + curr.quantity
     }, 0)
     return (
-        <Avatar src='./src/assets/img/lechuza.png'>
+        <Avatar src='https://i.imgur.com/qe2ToPf.png'>
             <AvatarBadge boxSize='1.25em' bg='green.500' borderColor='lightgreen'>
                 {cantidadTotal}
             </AvatarBadge>
