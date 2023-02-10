@@ -4,7 +4,6 @@ import { ItemDetailContainerAzucarados, ItemDetailContainerChocolate, ItemDetail
 import ItemListContainer from './components/ItemListContainer'
 import NavBar from './components/NavBar'
 import { Button } from '@chakra-ui/react'
-import { RxMagicWand } from 'react-icons/Rx'
 import { collection } from 'firebase/firestore'
 import useGetDocs from './customHooks/useGetDocs'
 import { db } from "../db/firebase-config"
@@ -35,7 +34,7 @@ function App() {
             </Link>
             <div className='barra'>
               <NavBar orders={orders}/>
-              <Button className={"button-" + nameClass} colorScheme='blackAlpha' onClick={()=>setTheme((theme ==="light") ? "dark" : "light")}>{(theme ==="light") ? "Nox" : "Lumos"}<RxMagicWand/></Button>
+              <Button className={"button-" + nameClass} colorScheme='blackAlpha' onClick={()=>setTheme((theme ==="light") ? "dark" : "light")}>{(theme ==="light") ? "Nox" : "Lumos"}</Button>
             </div>
           </header>
           <div className='items'>
