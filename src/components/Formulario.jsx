@@ -64,7 +64,7 @@ const Formulario = () =>{
                     <FormLabel>Dirección de email</FormLabel>
                     <Input type='email' value={inputEmail} placeholder='Email' onChange={(e) => setInputEmail (e.target.value)} />
                 </FormControl>
-                <FormControl isInvalid={isError}>
+                <FormControl isInvalid={isError} isRequired>
                     <FormLabel>Confirmación de email</FormLabel>
                     <Input type='email' value={inputEmail2} placeholder='Email' onChange={(e) => setInputEmail2 (e.target.value) } />
                     {!isError ? (
